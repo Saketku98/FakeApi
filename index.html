@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Http </title>
+    <style>
+#tab {
+  
+  border-collapse: collapse;
+  /* width: 100%; */
+  margin-left: 20%;
+}
+
+#tab td, #tab th {
+  border: 2px solid rgb(36, 139, 105);
+  padding: 8px;
+}
+
+#tab th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  background-color: #995be0;
+  color: cornsilk;
+}
+#tab td{
+    text-align: center;
+}
+
+table{
+    border-radius: solid red 10px;
+}
+h2{
+    text-align: center;
+    color: rgb(197, 36, 36);
+    text-decoration: underline;
+    font-size: 50px;
+}
+    </style>
+</head>
+<body>
+    <h2>HTTP & API</h2>
+    <table id="tab">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Level</th>
+            <th>Online</th>
+        </tr>
+    </table>
+    <script >
+    fetch('https://codingninjas.in/api/v3/courses')
+.then(res=>res.json())
+    .then(info => {
+        let courses = info.data.courses;
+       
+        for (let i = 0; i < courses.length; i++){
+            let url = courses[i].classroom_icon_url;
+            let id = courses[i].id;
+            let title = courses[i].name;
+            let level = courses[i].level;
+            let available_online = courses[i].available_online;
+            let table = document.querySelector('table');
+            let tableRow = document.createElement('tr');
+            tableRow.innerHTML = '<td>' + id +'</td>' + '<td>' + title + '</td>' + '<td>' + level + '</td>' + '<td>' + available_online +  '</td>' ;
+            table.appendChild(tableRow);
+        }
+})
+    </script>
+</body>
+</html>
